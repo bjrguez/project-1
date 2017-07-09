@@ -21,38 +21,3 @@ png(filename= "plot1.png", width = 480, height = 480)
 hist(as.numeric(as.character(subdata$Global_active_power)), col= "red", main = "", xlab = "")
 title("Global Active Power", xlab= "Global Active Power (kilowatts)")
 dev.off()
-
-# plot #2
-png(filename= "plot2.png", width = 480, height = 480)
-plot(as.numeric(as.character(subdata$Global_active_power)), type= "l", main = "", xlab = "", ylab = "")
-title(ylab= "Global Active Power (kilowatts)")
-dev.off()
-
-# plot #3
-png(filename= "plot3.png", width = 480, height = 480)
-plot(as.numeric(as.character(subdata$Sub_metering_1)), type= "l", main = "", xlab = "", ylab = "")
-lines(as.numeric(as.character(subdata$Sub_metering_2)), type= "l", col= "red")
-lines(as.numeric(as.character(subdata$Sub_metering_3)), type= "l", col= "blue")
-title(ylab= "Energy sub metering")
-legend(2000, 40, names(subdata)[7:9], lty= 1, fill= c("white", "red", "blue"), cex= 0.5)
-dev.off()
-
-# plot #4
-png(filename= "plot4.png", width = 480, height = 480)
-par(mfrow= c(2,2))
-#fig 1
-plot(as.numeric(as.character(subdata$Global_active_power)), type= "l", main = "", xlab = "", ylab = "")
-title(ylab= "Global Active Power")
-#fig 2
-plot(as.numeric(as.character(subdata$Voltage)), type= "l", main = "", xlab = "", ylab = "")
-title(ylab= "Voltage", xlab= "datetime")
-#fig 3
-plot(as.numeric(as.character(subdata$Sub_metering_1)), type= "l", main = "", xlab = "", ylab = "")
-lines(as.numeric(as.character(subdata$Sub_metering_2)), type= "l", col= "red")
-lines(as.numeric(as.character(subdata$Sub_metering_3)), type= "l", col= "blue")
-title(ylab= "Energy sub metering")
-legend(2000, 40, names(subdata)[7:9], lty= 1, fill= c("white", "red", "blue"), cex= 0.5)
-#fig 4
-plot(as.numeric(as.character(subdata$Global_reactive_power)), type= "l", main = "", xlab = "", ylab = "")
-title(ylab= "Global_reactive_power", xlab= "datetime")
-dev.off()
