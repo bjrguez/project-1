@@ -1,0 +1,37 @@
+#The dataset has 2,075,259 rows and 9 columns. 
+mydata = read.table("household_power_consumption.txt", header= TRUE, sep = ";")
+
+#1- Date: Date in format dd/mm/yyyy
+#2- Time: time in format hh:mm:ss
+#3- Global_active_power: household global minute-averaged active power (in kilowatt)
+#4- Global_reactive_power: household global minute-averaged reactive power (in kilowatt)
+#5- Voltage: minute-averaged voltage (in volt)
+#6- Global_intensity: household global minute-averaged current intensity (in ampere)
+#7- Sub_metering_1: energy sub-metering No. 1 (in watt-hour of active energy). It corresponds to the kitchen, containing mainly a dishwasher, an oven and a microwave (hot plates are not electric but gas powered).
+#8- Sub_metering_2: energy sub-metering No. 2 (in watt-hour of active energy). It corresponds to the laundry room, containing a washing-machine, a tumble-drier, a refrigerator and a light.
+#9- Sub_metering_3: energy sub-metering No. 3 (in watt-hour of active energy). It corresponds to an electric water-heater and an air-conditioner.
+
+#We will only be using data from the dates 2007-02-01 and 2007-02-02.
+index_1= which(mydata$Date == "1/2/2007")
+index_2= which(mydata$Date == "2/2/2007")
+subdata= mydata[c(index_1, index_2), ]
+
+# plot #4
+png(filename= "plot4.png", width = 480, height = 480)
+par(mfrow= c(2,2))
+#fig 1
+plot(as.numeric(as.character(subdata$Global_active_power)), type= "l", main = "", xlab = "", ylab = "")
+title(ylab= "Global Active Power")
+#fig 2
+plot(as.numeric(as.character(subdata$Voltage)), type= "l", main = "", xlab = "", ylab = "")
+title(ylab= "Voltage", xlab= "datetime")
+#fig 3
+plot(as.numeric(as.character(subdata$Sub_metering_1)), type= "l", main = "", xlab = "", ylab = "")
+lines(as.numeric(as.character(subdata$Sub_metering_2)), type= "l", col= "red")
+lines(as.numeric(as.character(subdata$Sub_metering_3)), type= "l", col= "blue")
+title(ylab= "Energy sub metering")
+legend(2000, 40, names(subdata)[7:9], lty= 1, fill= c("white", "red", "blue"), cex= 0.5)
+#fig 4
+plot(as.numeric(as.character(subdata$Global_reactive_power)), type= "l", main = "", xlab = "", ylab = "")
+title(ylab= "Global_reactive_power", xlab= "datetime")
+dev.off()
